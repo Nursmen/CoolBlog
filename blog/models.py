@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -32,8 +31,7 @@ class Post(models.Model):
 
 
     def publish(self):
-        if self.published_date == NULL:
-            self.published_date = timezone.now()
+        self.published_date = timezone.now()
 
         if self.PostTitle == '':
             self.PostTitle = check(self.text)
@@ -60,5 +58,5 @@ def check(text):
         print('bigger')
         fixedText = fixedText[:193] + '...'
         print(fixedText)
-        
+
     return fixedText
