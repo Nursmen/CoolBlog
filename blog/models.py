@@ -32,8 +32,8 @@ class Post(models.Model):
 
 
     def publish(self):
-        # if self.published_date == NULL:
-        self.published_date = timezone.now()
+        if self.published_date == NULL:
+            self.published_date = timezone.now()
 
         if self.PostTitle == '':
             self.PostTitle = check(self.text)
@@ -46,10 +46,19 @@ class Post(models.Model):
         return self.PostTitle
 
 def check(text):
-    letters = 'А́а́Е́е́И́и́О́о́У́у́Ы́ы́Э́э́Ю́ю́Я́я́ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁйцукенгшщзхъфывапролджэячсмитьбюё'
+    letters = '''А́а́Е́е́И́и́О́о́У́у́Ы́ы́Э́э́Ю́ю́Я́я́ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁйцукенгшщзхъфывапролджэячсмитьбюёQWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'''
     symbols = text.split(' ')[:2]
-    print(symbols)
+
     fixedText = [i for i in symbols[0] if i in letters]
-    fixedText = fixedText + [' '] + [i for i in symbols[1] if i in letters]
+
+    if len(symbols) > 1:
+        fixedText = fixedText + [' '] + [i for i in symbols[1] if i in letters]
+
     fixedText = ''.join(fixedText)
+
+    if len(fixedText) > 200:
+        print('bigger')
+        fixedText = fixedText[:193] + '...'
+        print(fixedText)
+        
     return fixedText
