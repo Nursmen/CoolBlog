@@ -32,8 +32,8 @@ class Post(models.Model):
 
 
     def publish(self):
-        if self.published_date == NULL:
-            self.published_date = timezone.now()
+        # if self.published_date == NULL:
+        self.published_date = timezone.now()
 
         if self.PostTitle == '':
             self.PostTitle = check(self.text)
