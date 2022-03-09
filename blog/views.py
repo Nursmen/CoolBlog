@@ -7,6 +7,10 @@ def post_list(request):
     post = Post.objects.exclude(published_date = None).\
         filter(published_date__lte=timezone.now()).\
         order_by('published_date')
+    
+    for i in post:
+        if len(i.text) > 300:
+            i.text = i.text[:300] + '...'
     # means published_date <= timezone.now() (меньше или равно)
     # just QuerySet 
 
