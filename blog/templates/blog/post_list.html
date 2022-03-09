@@ -7,27 +7,25 @@
     <title>HomePage</title>
 </head>
 <body>
-    <h1><a href="\">Homepage</a></h1>
+    <h1><a href="\">Django boys</a></h1>
+
+    {% for post in posts %}
 
     <div class="content">
-        <br>
-        <p>date:010110</p>
-        <h2>MyPost1</h2>
-        <p>SomeLoremImpsum</p>
-    </div>
-    <div class="content">
-        <br>
-        <p>date:020110</p>
-        <h2>MyPost2</h2>
-        <p>SomeLoremImpsum</p>
-    </div>
-    <div class="content">
-        <br>
-        <p>date:030110</p>
-        <h2>MyPost3</h2>
-        <p>SomeLoremImpsum</p>
-    </div>
+        <p>{{post.published_date}}</p>
 
+        <h2>{{post.PostTitle}}</h2>
+
+        <p>{{post.text|linebreaksbr}}</p> 
+        <!-- Из ентеров в br для большей читаемости -->
+    </div>
+    <br>
+
+    {% empty %}
+    
+    <p>Нет постов.</p>
+    
+    {% endfor %}
 
 </body>
 </html>
