@@ -45,7 +45,12 @@ class Post(models.Model):
         return self.PostTitle
 
 def check(text):
-    letters = 'А́а́Е́е́И́и́О́о́У́у́Ы́ы́Э́э́Ю́ю́Я́я́ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁйцукенгшщзхъфывапролджэячсмитьбюёQWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'
+    letters1 = 'А́а́Е́е́И́и́О́о́У́у́Ы́ы́Э́э́Ю́ю́Я́я́ЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮЁ'
+    letters2 = 'йцукенгшщзхъфывапролджэячсмитьбюё'
+    letters3 = 'QWERTYUIOPASDFGHJKLZXCVBNMqwertyuiopasdfghjklzxcvbnm'
+    letters4 = '-_\'\"1234567890'
+
+    letters = letters1 + letters2 + letters3 + letters4
     symbols = text.split(' ')[:2]
 
     fixedText = [i for i in symbols[0] if i in letters]
@@ -57,7 +62,7 @@ def check(text):
 
     if len(fixedText) > 200:
         print('bigger')
-        fixedText = fixedText[:193] + '...'
-        print(fixedText)
+        fixedText = fixedText[:193]
+        # print(fixedText)
 
-    return fixedText
+    return fixedText + '...'
