@@ -45,6 +45,11 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/edit.html', {'form':form, 'post':post})
 
+def delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return redirect('posts')
+
 def create_post(form, request):
     post = form.save(commit=False)
     # form.save() <- сохранит всё за нас.
