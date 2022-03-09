@@ -33,6 +33,18 @@ def post_new(request):
         form = PostForm
     return render(request, 'blog/edit.html', {'form':form})
 
+def post_edit(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            post = create_post(form, request)
+            return redirect('post_detail', pk=post.pk)
+        return redirect('posts')
+    else:
+        form = PostForm(instance=post)
+    return render(request, 'blog/edit.html', {'form':form, 'post':post})
+
 def create_post(form, request):
     post = form.save(commit=False)
     # form.save() <- сохранит всё за нас.
